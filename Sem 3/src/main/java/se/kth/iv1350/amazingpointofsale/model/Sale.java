@@ -2,7 +2,6 @@ package se.kth.iv1350.amazingpointofsale.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import se.kth.iv1350.amazingpointofsale.model.DTO.ItemDTO;
 
 /**
@@ -175,7 +174,7 @@ public class Sale {
      * @param item the item being sold.
      * @param quantity the quantity of the item being sold.
      */
-    public void updateRunningTotalAndVAT(ItemDTO item, int quantity) {
+    private void updateRunningTotalAndVAT(ItemDTO item, int quantity) {
         double price = item.getPrice() * quantity;
         runningTotal += price;
         VAT += price * item.getVAT();
