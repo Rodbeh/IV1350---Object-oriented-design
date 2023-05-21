@@ -6,11 +6,9 @@ package se.kth.iv1350.amazingpointofsale.model.DTO;
  */
 
 /**
- * 
  * DTO for the items that are used in a sale.
  */
 public class ItemDTO {
-    
     private final String itemIdentifier;
     private final String itemInformation;
     private final double price;
@@ -73,19 +71,5 @@ public class ItemDTO {
     public int getQuantitySold() {
         return quantitySold;
     }
-    
-    /**
-     * This method returns a string representation of the item object.
-     * 
-     * @return the itemIdentifier, itemInformation, price, VAT and quantitySold.
-     */
-    @Override
-    public String toString(){
-        return "ProductDTO{" + "itemIdentifier='" + itemIdentifier + '\'' + 
-        ", itemInformation='" + itemInformation + '\'' +
-        ", price=" + price +
-        ", VAT=" + VAT +
-        ", quantitySold=" + quantitySold +
-        '}';        
-    }  
+   
 }

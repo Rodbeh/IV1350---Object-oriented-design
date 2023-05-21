@@ -50,4 +50,5 @@ public class Discount {
             return totalRunningPrice * 0.1;
         return 0;       
     }  
+    
 }

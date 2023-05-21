@@ -12,8 +12,11 @@ import se.kth.iv1350.amazingpointofsale.model.DTO.SaleDTO;
  * 
  */
 public class Printer {
-    public Printer() {
-        
+    
+    /**
+     * Constructur that initializes a new instance of the class when called.
+     */
+    public Printer() {  
     }
     
     /**
@@ -25,4 +28,5 @@ public class Printer {
         System.out.println(">>>> Skriver ut kvitto");
         System.out.println(saleDTO.getReceipt());
     }
+    
 }

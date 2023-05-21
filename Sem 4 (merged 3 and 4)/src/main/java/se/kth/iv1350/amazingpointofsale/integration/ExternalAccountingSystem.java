@@ -1,7 +1,6 @@
 package se.kth.iv1350.amazingpointofsale.integration;
 
 import se.kth.iv1350.amazingpointofsale.model.DTO.SaleDTO;
-import se.kth.iv1350.amazingpointofsale.model.Sale;
 
 /**
  * @author rodbeh
@@ -38,4 +37,5 @@ public class ExternalAccountingSystem {
     public void logSaleInfo(SaleDTO saleDTO) {
         System.out.println(">>>> Försäljningsinformation har uppdaterats i redovisningssystemet.");
     } 
+    
 }

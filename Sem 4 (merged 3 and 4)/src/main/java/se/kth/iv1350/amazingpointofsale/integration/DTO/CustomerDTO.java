@@ -38,4 +38,5 @@ public class CustomerDTO {
     public String getPersonalNumber() {
         return personalNumber;
     }
+    
 }

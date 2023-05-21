@@ -22,7 +22,7 @@ public class Receipt {
     public Receipt(Sale sale) {
         this.sale = sale;
     }
-
+    
     /**
     * Implementation of the toString method for the Receipt
     * 
@@ -75,5 +75,6 @@ public class Receipt {
         sb.append("                    Tack för att du handlar hos oss!\n");
         sb.append("=========================================================================\n");
         return sb.toString();
-        }
     }
+
+}

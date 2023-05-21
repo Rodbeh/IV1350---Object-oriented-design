@@ -9,7 +9,6 @@ import se.kth.iv1350.amazingpointofsale.model.DTO.SaleDTO;
  */
 
 /**
- *
  * Represent a "Controller" that is responsible for all communication between databases
  * and sends it to the Controller class.
  */
@@ -36,8 +35,10 @@ public class DatabaseHandler {
      * 
      * @param itemIdentifier is the EAN-code for every item.
      * @return ItemDTO from the External Inventory System with the corresponding itemIdentifier.
+     * @throws ItemIdentifierInvalidException when the item identifier is invalid (checked)
+     * @throws DatabaseConnectionFailureException when the database cannot be reached (unchecked)
      */
-    public ItemDTO getItem(String itemIdentifier) {
+    public ItemDTO getItem(String itemIdentifier) throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
         return externalInventorySystem.getItem(itemIdentifier);
     }
     
@@ -69,4 +70,5 @@ public class DatabaseHandler {
     public void printReceipt(SaleDTO saleDTO) {
         printer.printReceipt(saleDTO);
     }
+    
 }

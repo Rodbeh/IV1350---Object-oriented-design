@@ -45,5 +45,6 @@ public class MemberDatabase {
      */
     public List<CustomerDTO> getMembers() {
         return this.members;
-    }  
+    }
+    
 }

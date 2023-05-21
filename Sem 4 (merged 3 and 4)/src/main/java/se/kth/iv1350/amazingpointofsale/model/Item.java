@@ -13,24 +13,41 @@ import se.kth.iv1350.amazingpointofsale.model.DTO.ItemDTO;
  * 
  */
 public class Item {
-    private String itemIdentifier;
-    private String itemInformation;
-    private double price;
-    private double VAT;
+    private final String itemIdentifier;
+    private final String itemInformation;
+    private final double price;
+    private final double VAT;
     private int quantitySold;
     
+    private Item(String itemIdentifier, String itemInformation, double price, double VAT, int quantitySold) {
+        this.itemIdentifier = itemIdentifier;
+        this.itemInformation = itemInformation;
+        this.price = price;
+        this.VAT = VAT;
+        this.quantitySold = quantitySold;
+    }
+    
     /**
-     * A constructor that takes an ItemDTO object and a quantitySold parameter.
+     * Creates and returns an Item object based on the parameters.
      * 
-     * @param item is the item. 
-     * @param quantitySold is the quantity sold of an item.
+     * @param itemIdentifier identifies the item with a specified combination of numbers.
+     * @param itemInformation is the information of the item.
+     * @param price is the price of the item.
+     * @param VAT is the VAT rate based on the item.
+     * @param quantitySold is the quantity that is sold of the item. 
+     * @return the created Item object. 
      */
-    public Item(ItemDTO item, int quantitySold) {
-        this.itemIdentifier = item.getItemIdentifier();
-        this.itemInformation = item.getItemInformation();
-        this.price = item.getPrice();
-        this.VAT = item.getVAT();
-        this.quantitySold = item.getQuantitySold();
+    public static Item createItem(String itemIdentifier, String itemInformation, double price, double VAT, int quantitySold) {
+        return new Item(itemIdentifier, itemInformation, price, VAT, quantitySold);
+    }
+    
+    /**
+     * Converts the current Item object to an ItemDTO object. 
+     * 
+     * @return the ItemDTO representing the current Item object. 
+     */
+    public ItemDTO toDTO() {
+        return new ItemDTO(itemIdentifier, itemInformation, price, VAT, quantitySold);
     }
     
     /**
@@ -82,19 +99,5 @@ public class Item {
         this.quantitySold = quantitySold;
     }
     
-    /**
-     * This method returns a string representation of the item object.
-     * 
-     * @return the itemInformation, price, VAT and quantitySold.
-     */
-    @Override
-    public String toString() {
-        return "Product{" + 
-        "itemInformation='" + itemInformation + '\'' +
-        ", price=" + price +
-        ", VAT=" + VAT +
-        ", quantitySold=" + quantitySold +
-        '}';    
-    }  
 }
 

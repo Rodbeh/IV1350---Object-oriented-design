@@ -13,8 +13,10 @@ import se.kth.iv1350.amazingpointofsale.model.DTO.SaleDTO;
  */
 public class Register {
     
-    public Register() {
-        
+    /**
+     * Constructur that initializes a new instance of the class when called.
+     */
+    public Register() {   
     }
     
     private double amount = 0;
@@ -26,6 +28,7 @@ public class Register {
      */
     public void increaseRegisterAmount(SaleDTO saleDTO) {
         this.amount += saleDTO.getRunningTotal();
-        System.out.println("Totalt belopp i kassan är: " + this.amount + "Kr");
+        System.out.println("Totalt belopp i kassan är: " + this.amount + "kr");
     }
+    
 }

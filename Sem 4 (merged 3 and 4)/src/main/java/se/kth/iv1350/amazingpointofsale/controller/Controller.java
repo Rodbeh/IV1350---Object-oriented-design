@@ -1,10 +1,16 @@
 package se.kth.iv1350.amazingpointofsale.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import se.kth.iv1350.amazingpointofsale.integration.DatabaseConnectionFailureException;
 import se.kth.iv1350.amazingpointofsale.integration.DatabaseHandler;
+import se.kth.iv1350.amazingpointofsale.integration.ItemIdentifierInvalidException;
 import se.kth.iv1350.amazingpointofsale.model.DTO.ItemDTO;
 import se.kth.iv1350.amazingpointofsale.model.Sale;
 import se.kth.iv1350.amazingpointofsale.model.DTO.SaleDTO;
 import se.kth.iv1350.amazingpointofsale.integration.MemberDatabase;
+import se.kth.iv1350.amazingpointofsale.model.ItemFactory;
+import se.kth.iv1350.amazingpointofsale.model.SaleObserver;
 
 /**
  * @author rodbeh
@@ -18,12 +24,15 @@ public class Controller {
     private Sale sale;
     private final DatabaseHandler databaseHandler;
     private final MemberDatabase memberDB;
+    private final List<SaleObserver> saleObservers = new ArrayList<>();
     
     /**
-     * Start a new sale. This is the first method called in the application. 
+     * Start a new sale.This is the first method called in the application. 
+     * 
+     * @param itemFactory the ItemFactory used for creating items in the sale. 
      */
-    public void startSale() {
-        sale = new Sale();
+    public void startSale(ItemFactory itemFactory) {
+        sale = new Sale(itemFactory);
     }
     
     /**
@@ -34,7 +43,7 @@ public class Controller {
      * @param quantity is the quantity of the items that get scanned during the sale.
      * @return a string representation of the item and the quantity.
      */
-    public String scanItem(String itemIdentifier, int quantity) {
+    public String scanItem(String itemIdentifier, int quantity) throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
         ItemDTO item = databaseHandler.getItem(itemIdentifier);
         return sale.registerItemToSaleLog(item, quantity);
     }
@@ -45,7 +54,18 @@ public class Controller {
      * @return the running total of the sale.
      */
     public double getTotal() {
+        sale.addSaleObservers(saleObservers);
         return sale.getRunningTotal();
+    }
+    
+    /**
+     * Adds a SaleObserver object to the list of observers that get notified
+     * of updates in the sale.
+     * 
+     * @param obs is the SaleObserver object that is added to the list. 
+     */
+    public void addSaleObserver(SaleObserver obs) {
+        saleObservers.add(obs);
     }
     
     /**
@@ -63,13 +83,11 @@ public class Controller {
      * @param personalNumber is the customers personal number.
      * @return a boolean that represents whether a discount was added or not.
      */
-    public boolean CheckIfCustomerIsMember(String personalNumber) {
+    public boolean discountAppliedIfCustomerMember(String personalNumber) {
         if(memberDB.checkMembership(personalNumber)) {
             sale.discount();
-            System.out.println(">>>> Kund är medlem.");
             return true;
         } else {
-            System.out.println(">>>> Kund är ej medlem.");
             return false;
         }
     }
@@ -95,6 +113,6 @@ public class Controller {
     public Controller(DatabaseHandler databaseHandler) {
         this.databaseHandler = databaseHandler;
         this.memberDB = databaseHandler.getMemberDatabase();
-    }    
+    } 
     
 }

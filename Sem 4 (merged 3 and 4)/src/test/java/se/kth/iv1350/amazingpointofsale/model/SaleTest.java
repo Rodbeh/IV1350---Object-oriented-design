@@ -6,10 +6,12 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1350.amazingpointofsale.model.DTO.ItemDTO;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 /**
  *
  * @author rodbeh
  */
+
 public class SaleTest {
     private Sale sale;
     private ItemDTO fakeItem;
@@ -17,7 +19,8 @@ public class SaleTest {
 
     @BeforeEach
     public void setUp() {
-        sale = new Sale();
+        ItemFactory itemFactory = new DefaultItemFactory();
+        sale = new Sale(itemFactory);
         fakeItem = new ItemDTO("1234", "item", 149.99, 0.10, 10);
         anotherFakeItem = new ItemDTO("4567", "anotherItem", 299.99, 0.20, 20);
         sale.registerItemToSaleLog(fakeItem, 1);
@@ -72,4 +75,5 @@ public class SaleTest {
         int result = sale.getItemList().size();
         assertEquals(expResult, result, "Varan lades inte till i korgen.");
     }
+    
 }

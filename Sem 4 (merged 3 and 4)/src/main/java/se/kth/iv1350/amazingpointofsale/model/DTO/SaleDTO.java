@@ -12,7 +12,6 @@ import se.kth.iv1350.amazingpointofsale.model.Sale;
  */
 
 /**
- * 
  * DTO for a sale in a pos.
  */
 public class SaleDTO {

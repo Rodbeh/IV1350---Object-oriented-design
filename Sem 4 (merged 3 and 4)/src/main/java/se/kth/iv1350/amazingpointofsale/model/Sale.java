@@ -2,6 +2,7 @@ package se.kth.iv1350.amazingpointofsale.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import se.kth.iv1350.amazingpointofsale.model.DTO.ItemDTO;
 
 /**
@@ -22,11 +23,15 @@ public class Sale {
     private Discount discount;
     private boolean discountApplied = false;
     private double totalDiscount = 0;
+    private final List<SaleObserver> saleObservers = new ArrayList<>();
+    private final ItemFactory itemFactory;
     
     /**
      * Creates a new instance and saves the time of the sale. 
+     * @param itemFactory is used to create items for the sale. 
      */
-    public Sale() {
+    public Sale(ItemFactory itemFactory) {
+        this.itemFactory = itemFactory;
         setTimeAndDateOfSale();
         receipt = new Receipt(this);
     }
@@ -118,23 +123,26 @@ public class Sale {
     }
     
     /**
-     * Registers the sale of an item and updates the total and VAT.
+     * Registers the sale of an item, updates the total and VAT and returns the
+     * updated display.
      * 
-     * @param item is the registered item.
-     * @param quantity is the quantity of the sold item.
-     * @return updateTheDisplay. 
+     * @param itemDTO is the item to be registered for the sale.
+     * @param quantitySold is the quantity of the item sold.
+     * @return the updated display after registering the item sale. 
      */
-    public String registerItemToSaleLog(ItemDTO item, int quantity) {
-        if (itemHasBeenRegistered(item)) {
-            increaseQuantity(item, quantity);
+    public String registerItemToSaleLog(ItemDTO itemDTO, int quantitySold) {
+         Item item = itemFactory.createItem(itemDTO, quantitySold);
+        
+        if (itemHasBeenRegistered(itemDTO)) {
+            increaseQuantity(itemDTO, quantitySold);
         } else {
-            itemList.add(new Item(item, quantity));
-            itemList.get(itemList.size() - 1).setQuantitySold(quantity);
+            itemList.add(item);
+            item.setQuantitySold(quantitySold);
         }
         
-        updateRunningTotalAndVAT(item, quantity);
+        updateRunningTotalAndVAT(itemDTO, quantitySold);
         
-        return updateTheDisplay(item, quantity);
+        return updateTheDisplay(itemDTO, quantitySold);
     }
     
     
@@ -189,7 +197,6 @@ public class Sale {
         this.totalDiscount = discount.calculateDiscountAmount1() + discount.calculateDiscountAmount2(this.runningTotal);
     }
     
-    
     /**
      * Applies a discount to a sale by modifying running total.
      */
@@ -211,5 +218,23 @@ public class Sale {
         String antal = String.format("Antal: %d", quantity);
         String totalSumma = String.format("Total summa: %.2f kr", runningTotal);
         return vara + "\n" + pris + "\n" + antal + "\n" + totalSumma + "\n";
-    }   
+    } 
+    
+    /**
+     * This metod adds one or more sale observers to the list of sale observers
+     * and then notifies all of them.
+     * 
+     * @param saleObserver is a list of objects that implement the SaleObserver interface.
+     */
+    public void addSaleObservers(List<SaleObserver> saleObserver) {
+        this.saleObservers.addAll(saleObserver);
+        notifyObservers();
+    }
+    
+    private void notifyObservers() {
+        for(SaleObserver obs : this.saleObservers) {
+            obs.newTotalRevenue(getRunningTotal());
+        }
+    }
+    
 }
