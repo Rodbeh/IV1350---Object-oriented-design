@@ -51,14 +51,18 @@ public class View {
     
     private void updateAndDisplayItems() {
         ArrayList<ItemDTO> currentItems = contr.getCurrentItemList();
-        System.out.println("Totalt antal varor: " + currentItems.size());
-        System.out.println("-------------------------------------------------------------------------");
+       
         
+        int totalQuantitySold = 0;
         double runningTotal = 0;
         for (ItemDTO item : currentItems) {
+            totalQuantitySold += item.getQuantitySold();
             runningTotal += item.getPrice() * item.getQuantitySold();
             System.out.println(itemToString(item, runningTotal));
         }
+        
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("Totalt antal varor: " + totalQuantitySold);
     }
     
     private String itemToString(ItemDTO item, double runningTotal) {
