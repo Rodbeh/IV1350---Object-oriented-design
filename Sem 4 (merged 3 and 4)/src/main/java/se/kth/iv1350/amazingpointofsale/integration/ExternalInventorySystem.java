@@ -33,8 +33,8 @@ public class ExternalInventorySystem {
      * 
      * @param itemIdentifier is the EAN-code for every item.
      * @return the itemDTO with the corresponding itemIdentifier.
-     * @throws ItemIdentifierInvalidException when the item identifier is invalid (unchecked)
-     * @throws DatabaseConnectionFailureException when the database cannot be reached (unchecked)
+     * @throws ItemIdentifierInvalidException when the item identifier is invalid (unchecked).
+     * @throws DatabaseConnectionFailureException when the database cannot be reached (unchecked).
      */
     public ItemDTO getItem(String itemIdentifier) throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
         for (ItemDTO itemDTO : inventory) {

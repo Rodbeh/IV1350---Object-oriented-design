@@ -1,6 +1,8 @@
 package se.kth.iv1350.amazingpointofsale.view;
 
+import java.util.ArrayList;
 import se.kth.iv1350.amazingpointofsale.controller.Controller;
+import se.kth.iv1350.amazingpointofsale.model.DTO.ItemDTO;
 
 /**
  * This is a placeholder for the real view. It contains a hardcoded execution with calls to all
@@ -8,6 +10,7 @@ import se.kth.iv1350.amazingpointofsale.controller.Controller;
  */
 public class View {
     private final Controller contr;
+   
     /**
      * Creates a new instance, that uses the specified controller for all calls to other layers.
      * 
@@ -36,12 +39,33 @@ public class View {
     }
 
     private void scanItem() {
-        System.out.println(contr.scanItem("7310865000361", 1));
-        System.out.println(contr.scanItem("7318690066903", 3));
-        System.out.println(contr.scanItem("7311041060216", 1));
-        System.out.println(contr.scanItem("8715800002315", 1));
-        System.out.println(contr.scanItem("7310340002279", 2));
-        System.out.println(contr.scanItem("7310865005168", 3));    
+        contr.scanItem("7310865000361", 1);
+        contr.scanItem("7318690066903", 3);
+        contr.scanItem("7311041060216", 1);
+        contr.scanItem("8715800002315", 1);
+        contr.scanItem("7310340002279", 2);
+        contr.scanItem("7310865005168", 3);   
+        
+        updateAndDisplayItems();
+    }
+    
+    private void updateAndDisplayItems() {
+        ArrayList<ItemDTO> currentItems = contr.getCurrentItemList();
+        System.out.println("Totalt antal varor: " + currentItems.size());
+        System.out.println("-------------------------------------------------------------------------");
+        
+        double runningTotal = 0;
+        for (ItemDTO item : currentItems) {
+            runningTotal += item.getPrice() * item.getQuantitySold();
+            System.out.println(itemToString(item, runningTotal));
+        }
+    }
+    
+    private String itemToString(ItemDTO item, double runningTotal) {
+        return "Varubeskrivning: " + item.getItemInformation() + "\n" +
+                "Pris: " + String.format("%.2f kr", item.getPrice()) + "\n" +
+                "Antal: " + item.getQuantitySold() + "\n" +
+                "Total summa: " + String.format("%.2f kr", runningTotal) + "\n";
     }
     
     /*private void addDiscount() {
@@ -61,6 +85,7 @@ public class View {
         System.out.println("Mottaget kontant: " + 500 + "kr");
         System.out.println("-------------------------------------------------------------------------");
         contr.endSale(500);
+        contr.generateReceipt();
     }
+    
 }
-

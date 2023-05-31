@@ -42,6 +42,9 @@ public class Controller {
      * @param itemIdentifier is the unique item identifier of the item that gets scanned during the sale.
      * @param quantity is the quantity of the items that get scanned during the sale.
      * @return a string representation of the item and the quantity.
+     * @throws ItemIdentifierInvalidException when the item identifier is invalid.
+     * @throws DatabaseConnectionFailureException when the database cannot be reached.
+     * 
      */
     public String scanItem(String itemIdentifier, int quantity) throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
         ItemDTO item = databaseHandler.getItem(itemIdentifier);

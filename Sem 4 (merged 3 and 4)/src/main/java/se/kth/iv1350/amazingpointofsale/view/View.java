@@ -33,16 +33,22 @@ public class View {
     
     /**
      * Performs a fake sale, by calling all system operations in the controller. 
-     * 
-     * @throws ItemIdentifierInvalidException when the item identifier is invalid (checked)
-     * @throws DatabaseConnectionFailureException when the database cannot be reached (unchecked)
+     *
      */
-    public void runFakeExecution() throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
-        startSale();
-        //scanItem();
-        scanItemException();
-        //addDiscount();
-        endSale();
+    public void runFakeExecution() {
+        try {
+            startSale();
+            //scanItem();
+            scanItemException();
+            //addDiscount();
+            endSale();
+        } catch (ItemIdentifierInvalidException exception) {
+            errorMessageHandler.showErrorMessage(exception.getMessage());
+        } catch (DatabaseConnectionFailureException exception) {
+            errorMessageHandler.showErrorMessage(exception.getMessage());
+            fileLogger.log(exception);
+            //consoleLogger.log(exception);
+        }
     }
     
     private void startSale() {
@@ -63,7 +69,7 @@ public class View {
         System.out.println(contr.scanItem("7310865005168", 3));    
     }
     
-    private void scanItemException() {
+    public void scanItemException() throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
         try {
             System.out.println(contr.scanItem("7310865000361", 1));
             System.out.println(contr.scanItem("7318690066903", 3));
@@ -71,13 +77,15 @@ public class View {
             System.out.println(contr.scanItem("8715800002315", 1));
             System.out.println(contr.scanItem("7310340002279", 2));
             System.out.println(contr.scanItem("404", 3));
-        } catch(DatabaseConnectionFailureException | ItemIdentifierInvalidException exception) {
+        } catch (ItemIdentifierInvalidException exception) {
+            errorMessageHandler.showErrorMessage(exception.getMessage());
+        } catch (DatabaseConnectionFailureException exception) {
             errorMessageHandler.showErrorMessage(exception.getMessage());
             fileLogger.log(exception);
             //consoleLogger.log(exception);
-        }
+        }    
     }
-        
+
     /*private void addDiscount() {
         boolean discountAdded = contr.discountAppliedIfCustomerMember("8002151234");
         if(discountAdded) {

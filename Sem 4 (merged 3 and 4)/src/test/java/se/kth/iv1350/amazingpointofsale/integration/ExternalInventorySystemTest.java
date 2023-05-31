@@ -42,10 +42,10 @@ public class ExternalInventorySystemTest {
         String invalidItemIdentifier = "0000000000000";
         try {
             inventory.getItem(invalidItemIdentifier);
-            fail("Expected ItemIdentifierInvalidException was not thrown");
+            fail("Förväntat ItemIdentifierInvalidException kastades inte.");
         } catch (ItemIdentifierInvalidException exception) {
             assertEquals("Varan med streckkoden " + invalidItemIdentifier + " är ogiltig!", exception.getMessage(),
-                "Incorrect exception message for invalid item identifier");
+                "Felaktigt undantagsmeddelande för ogiltig streckkod.");
         }
     }
     
@@ -54,12 +54,12 @@ public class ExternalInventorySystemTest {
         String invalidItemIdentifier = "404";
         try {
             inventory.getItem(invalidItemIdentifier);
-            fail("Expected DatabaseConnectionFailureException was not thrown");
+            fail("Förväntat DatabaseConnectionFailureException kastades inte.");
         } catch (DatabaseConnectionFailureException exception) {
             assertEquals("Databasen kunde inte nås!", exception.getMessage(),
-                "Incorrect exception message for item identifier 100");
+                "Felaktigt undantagsmeddelande för streckkoden 404.");
         } catch (ItemIdentifierInvalidException exception) {
-            fail("An unexpected exception was thrown: " + exception.getMessage());
+            fail("Ett oväntat undantag kastades: " + exception.getMessage());
         }
     }
 
@@ -70,9 +70,9 @@ public class ExternalInventorySystemTest {
         try {
             result = inventory.getItem("7311041060216").getPrice();
         } catch (ItemIdentifierInvalidException exception) {
-            fail("An unexpected exception was thrown: " + exception.getMessage());
+            fail("Ett oväntat undantag kastades: " + exception.getMessage());
         }
-        assertEquals(expResult, result, "The retrieved price of the item does not match the expected price.");
+        assertEquals(expResult, result, "Det återfunna priset på varan matchar inte det förväntade priset.");
     }
 
     @Test
@@ -80,9 +80,9 @@ public class ExternalInventorySystemTest {
         try {
             double expResult = 0;
             double result = inventory.getItem("7311041060216").getPrice();
-            assertNotEquals(expResult, result, "Den hittade priset på varan stämmer överens, vilket den inte borde göra.");
+            assertNotEquals(expResult, result, "Det återfunna priset på varan stämmer överens, vilket den inte borde göra.");
         } catch (ItemIdentifierInvalidException exception) {
-            fail("An unexpected exception was thrown: " + exception.getMessage());
+            fail("Ett oväntat undantag kastades: " + exception.getMessage());
         }
     }
 
@@ -91,9 +91,9 @@ public class ExternalInventorySystemTest {
         String expResult = "Strösocker 2kg Dansukker";
         try {
             String result = inventory.getItem("7310340002279").getItemInformation();
-            assertEquals(expResult, result, "Den hittade namnet på varan stämmer inte.");
+            assertEquals(expResult, result, "Det återfunna namnet på varan stämmer inte.");
         } catch (ItemIdentifierInvalidException exception) {
-            fail("An unexpected exception was thrown: " + exception.getMessage());
+            fail("Ett oväntat undantag kastades: " + exception.getMessage());
         }
     }
 
@@ -104,9 +104,9 @@ public class ExternalInventorySystemTest {
             double result = inventory.getItem("7310865005168").getVAT();
             assertEquals(expResult, result, "Varans moms värde stämmer inte.");
         } catch (ItemIdentifierInvalidException e) {
-            fail("An unexpected ItemIdentifierInvalidException was thrown: " + e.getMessage());
+            fail("Ett oväntat ItemIdentifierInvalidException kastades: " + e.getMessage());
         } catch (DatabaseConnectionFailureException e) {
-            fail("An unexpected DatabaseConnectionFailureException was thrown: " + e.getMessage());
+            fail("Ett oväntat DatabaseConnectionFailureException kastades: " + e.getMessage());
         }
     }
     

@@ -1,10 +1,13 @@
 package se.kth.iv1350.amazingpointofsale.controller;
 
+import java.util.ArrayList;
 import se.kth.iv1350.amazingpointofsale.integration.DatabaseHandler;
 import se.kth.iv1350.amazingpointofsale.model.DTO.ItemDTO;
 import se.kth.iv1350.amazingpointofsale.model.Sale;
 import se.kth.iv1350.amazingpointofsale.model.DTO.SaleDTO;
 import se.kth.iv1350.amazingpointofsale.integration.MemberDatabase;
+import se.kth.iv1350.amazingpointofsale.model.Item;
+import se.kth.iv1350.amazingpointofsale.model.Receipt;
 
 /**
  * @author rodbeh
@@ -23,7 +26,16 @@ public class Controller {
      * Start a new sale. This is the first method called in the application. 
      */
     public void startSale() {
-        sale = new Sale();
+       sale = new Sale();
+    }
+    
+    /**
+     * Retrieves the current sale object representing the current sale.
+     * 
+     * @return the sale object representing the current sale. 
+     */
+    public Sale getSale() {
+        return sale;
     }
     
     /**
@@ -34,9 +46,9 @@ public class Controller {
      * @param quantity is the quantity of the items that get scanned during the sale.
      * @return a string representation of the item and the quantity.
      */
-    public String scanItem(String itemIdentifier, int quantity) {
+    public void scanItem(String itemIdentifier, int quantity) {
         ItemDTO item = databaseHandler.getItem(itemIdentifier);
-        return sale.registerItemToSaleLog(item, quantity);
+        sale.registerItemToSaleLog(item, quantity);
     }
     
     /**
@@ -58,18 +70,30 @@ public class Controller {
     }
     
     /**
+     * Retrieves the current list of items in the sale and returns ItemDTO objects
+     * representing the items with relevant information.
+     * 
+     * @return an ArrayList of ItemDTO objects representing the current items in the sale.
+     */
+    public ArrayList<ItemDTO> getCurrentItemList() {
+        ArrayList<ItemDTO> itemDTOList = new ArrayList<>();
+        for (Item item : sale.getItemList()) {
+            itemDTOList.add(new ItemDTO(item.getItemIdentifier(), item.getItemInformation(), item.getPrice(), item.getVAT(), item.getQuantitySold()));
+        }
+        return itemDTOList;
+    }
+    
+    /**
      * Adds a discount to the current sale if the provided personal number matches a membership in the member database. 
      * 
      * @param personalNumber is the customers personal number.
      * @return a boolean that represents whether a discount was added or not.
      */
-    public boolean CheckIfCustomerIsMember(String personalNumber) {
+    public boolean discountAppliedIfCustomerMember(String personalNumber) {
         if(memberDB.checkMembership(personalNumber)) {
             sale.discount();
-            System.out.println(">>>> Kund är medlem.");
             return true;
         } else {
-            System.out.println(">>>> Kund är ej medlem.");
             return false;
         }
     }
@@ -85,6 +109,16 @@ public class Controller {
         SaleDTO saleDTO = new SaleDTO(sale);
         databaseHandler.updateSaleLog(saleDTO);
         databaseHandler.printReceipt(saleDTO);
+    }
+    
+    /**
+     * Creates a receipt object based on the current sale and returns it.
+     * 
+     * @return the generated receipt object representing the current sale.
+     */
+    public Receipt generateReceipt() {
+        Receipt receipt = new Receipt(sale);
+        return receipt;
     }
     
     /**

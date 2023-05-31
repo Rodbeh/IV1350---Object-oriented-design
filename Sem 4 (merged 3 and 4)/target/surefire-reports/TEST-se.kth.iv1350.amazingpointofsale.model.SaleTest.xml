@@ -13,9 +13,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="SE"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-15.0.1.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/rodbeh/Documents/KTH - Teknik och Ekonomi -  2021 - 2023/ÅR 2/Objektorienterad Design (IV1350)/AmazingPointofSale - Repository - IV1350---Object-oriented-design - 2023-05-04/IV1350-Object-oriented-design/Sem 4 (merged 3 and 4)/target/surefire/surefirebooter-20230521232223201_3.jar /Users/rodbeh/Documents/KTH - Teknik och Ekonomi -  2021 - 2023/ÅR 2/Objektorienterad Design (IV1350)/AmazingPointofSale - Repository - IV1350---Object-oriented-design - 2023-05-04/IV1350-Object-oriented-design/Sem 4 (merged 3 and 4)/target/surefire 2023-05-21T23-22-23_121-jvmRun1 surefire-20230521232223201_1tmp surefire_0-20230521232223201_2tmp"/>
+    <property name="sun.java.command" value="/Users/rodbeh/Documents/KTH - Teknik och Ekonomi -  2021 - 2023/ÅR 2/Objektorienterad Design (IV1350)/AmazingPointofSale - Repository - IV1350---Object-oriented-design - 2023-05-04/IV1350-Object-oriented-design/Sem 4 (merged 3 and 4)/target/surefire/surefirebooter-20230525225431617_3.jar /Users/rodbeh/Documents/KTH - Teknik och Ekonomi -  2021 - 2023/ÅR 2/Objektorienterad Design (IV1350)/AmazingPointofSale - Repository - IV1350---Object-oriented-design - 2023-05-04/IV1350-Object-oriented-design/Sem 4 (merged 3 and 4)/target/surefire 2023-05-25T22-54-31_536-jvmRun1 surefire-20230525225431617_1tmp surefire_0-20230525225431617_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="se.kth.iv1350.amazingpointofsale.model.SaleTest"/>
+    <property name="test" value="se.kth.iv1350.amazingpointofsale.model.**.*Test"/>
     <property name="surefire.test.class.path" value="/Users/rodbeh/Documents/KTH - Teknik och Ekonomi -  2021 - 2023/ÅR 2/Objektorienterad Design (IV1350)/AmazingPointofSale - Repository - IV1350---Object-oriented-design - 2023-05-04/IV1350-Object-oriented-design/Sem 4 (merged 3 and 4)/target/test-classes:/Users/rodbeh/Documents/KTH - Teknik och Ekonomi -  2021 - 2023/ÅR 2/Objektorienterad Design (IV1350)/AmazingPointofSale - Repository - IV1350---Object-oriented-design - 2023-05-04/IV1350-Object-oriented-design/Sem 4 (merged 3 and 4)/target/classes:/Users/rodbeh/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.0/junit-jupiter-api-5.6.0.jar:/Users/rodbeh/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/Users/rodbeh/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/rodbeh/.m2/repository/org/junit/platform/junit-platform-commons/1.6.0/junit-platform-commons-1.6.0.jar:/Users/rodbeh/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.6.0/junit-jupiter-params-5.6.0.jar:/Users/rodbeh/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.0/junit-jupiter-engine-5.6.0.jar:/Users/rodbeh/.m2/repository/org/junit/platform/junit-platform-engine/1.6.0/junit-platform-engine-1.6.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/rodbeh"/>
@@ -29,7 +29,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/Users/rodbeh/Documents/KTH - Teknik och Ekonomi -  2021 - 2023/ÅR 2/Objektorienterad Design (IV1350)/AmazingPointofSale - Repository - IV1350---Object-oriented-design - 2023-05-04/IV1350-Object-oriented-design/Sem 4 (merged 3 and 4)/target/surefire/surefirebooter-20230521232223201_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/rodbeh/Documents/KTH - Teknik och Ekonomi -  2021 - 2023/ÅR 2/Objektorienterad Design (IV1350)/AmazingPointofSale - Repository - IV1350---Object-oriented-design - 2023-05-04/IV1350-Object-oriented-design/Sem 4 (merged 3 and 4)/target/surefire/surefirebooter-20230525225431617_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="15.0.1+9-18"/>
     <property name="user.name" value="rodbeh"/>
@@ -53,10 +53,10 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="59.0"/>
   </properties>
-  <testcase name="testItemAlreadyScanned" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.038"/>
-  <testcase name="testGetItemIdentifier" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.002"/>
-  <testcase name="testGetItemPrice" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.001"/>
-  <testcase name="testRegisterItem" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.002"/>
+  <testcase name="testItemAlreadyScanned" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.039"/>
+  <testcase name="testGetItemIdentifier" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.003"/>
+  <testcase name="testGetItemPrice" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.002"/>
+  <testcase name="testRegisterItem" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.001"/>
   <testcase name="testGetName" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.001"/>
   <testcase name="testGetItemVATRate" classname="se.kth.iv1350.amazingpointofsale.model.SaleTest" time="0.001"/>
 </testsuite>

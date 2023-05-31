@@ -1,10 +1,10 @@
-2023-05-21 23:28:46 An exception was thrown: <Databasen kunde inte nås!>
+2023-05-30 19:10:20 An exception was thrown: <Databasen kunde inte nås!>
 se.kth.iv1350.amazingpointofsale.integration.DatabaseConnectionFailureException: Databasen kunde inte nås!
 	at se.kth.iv1350.amazingpointofsale.integration.ExternalInventorySystem.getItem(ExternalInventorySystem.java:46)
 	at se.kth.iv1350.amazingpointofsale.integration.DatabaseHandler.getItem(DatabaseHandler.java:42)
-	at se.kth.iv1350.amazingpointofsale.controller.Controller.scanItem(Controller.java:47)
-	at se.kth.iv1350.amazingpointofsale.view.View.scanItemException(View.java:73)
-	at se.kth.iv1350.amazingpointofsale.view.View.runFakeExecution(View.java:43)
-	at se.kth.iv1350.amazingpointofsale.startup.Main.main(Main.java:19)
+	at se.kth.iv1350.amazingpointofsale.controller.Controller.scanItem(Controller.java:50)
+	at se.kth.iv1350.amazingpointofsale.view.View.scanItemException(View.java:79)
+	at se.kth.iv1350.amazingpointofsale.view.View.runFakeExecution(View.java:42)
+	at se.kth.iv1350.amazingpointofsale.startup.Main.main(Main.java:18)
 
 
