@@ -52,7 +52,6 @@ public class View {
     private void updateAndDisplayItems() {
         ArrayList<ItemDTO> currentItems = contr.getCurrentItemList();
        
-        
         int totalQuantitySold = 0;
         double runningTotal = 0;
         for (ItemDTO item : currentItems) {
