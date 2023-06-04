@@ -3,8 +3,6 @@ package se.kth.iv1350.amazingpointofsale.view;
 import se.kth.iv1350.amazingpointofsale.controller.Controller;
 import se.kth.iv1350.amazingpointofsale.integration.DatabaseConnectionFailureException;
 import se.kth.iv1350.amazingpointofsale.integration.ItemIdentifierInvalidException;
-import se.kth.iv1350.amazingpointofsale.model.DefaultItemFactory;
-import se.kth.iv1350.amazingpointofsale.model.ItemFactory;
 import se.kth.iv1350.amazingpointofsale.util.ConsoleLogger;
 import se.kth.iv1350.amazingpointofsale.util.FileLogger;
 import se.kth.iv1350.amazingpointofsale.util.TotalRevenueFileOutput;
@@ -52,8 +50,7 @@ public class View {
     }
     
     private void startSale() {
-        ItemFactory itemFactory = new DefaultItemFactory();
-        contr.startSale(itemFactory);
+        contr.startSale();
         System.out.println();
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("\t\t          Ny försäljning påbörjad");
@@ -69,7 +66,7 @@ public class View {
         System.out.println(contr.scanItem("7310865005168", 3));    
     }
     
-    public void scanItemException() throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
+    private void scanItemException() throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
         try {
             System.out.println(contr.scanItem("7310865000361", 1));
             System.out.println(contr.scanItem("7318690066903", 3));

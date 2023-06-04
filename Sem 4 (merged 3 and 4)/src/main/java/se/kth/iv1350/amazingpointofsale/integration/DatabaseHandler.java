@@ -35,8 +35,8 @@ public class DatabaseHandler {
      * 
      * @param itemIdentifier is the EAN-code for every item.
      * @return ItemDTO from the External Inventory System with the corresponding itemIdentifier.
-     * @throws ItemIdentifierInvalidException when the item identifier is invalid (checked)
-     * @throws DatabaseConnectionFailureException when the database cannot be reached (unchecked)
+     * @throws ItemIdentifierInvalidException when the item identifier is invalid (checked).
+     * @throws DatabaseConnectionFailureException when the database cannot be reached (unchecked).
      */
     public ItemDTO getItem(String itemIdentifier) throws ItemIdentifierInvalidException, DatabaseConnectionFailureException {
         return externalInventorySystem.getItem(itemIdentifier);

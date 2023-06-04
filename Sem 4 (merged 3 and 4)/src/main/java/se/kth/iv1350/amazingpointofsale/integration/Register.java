@@ -12,14 +12,13 @@ import se.kth.iv1350.amazingpointofsale.model.DTO.SaleDTO;
  * 
  */
 public class Register {
+    private double amount = 0;
     
     /**
      * Constructur that initializes a new instance of the class when called.
      */
     public Register() {   
     }
-    
-    private double amount = 0;
     
     /**
      * Increases the amount of money in the register by adding the running total of a sale. 

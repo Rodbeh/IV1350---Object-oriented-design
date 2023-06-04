@@ -19,35 +19,18 @@ public class Item {
     private final double VAT;
     private int quantitySold;
     
-    private Item(String itemIdentifier, String itemInformation, double price, double VAT, int quantitySold) {
-        this.itemIdentifier = itemIdentifier;
-        this.itemInformation = itemInformation;
-        this.price = price;
-        this.VAT = VAT;
-        this.quantitySold = quantitySold;
-    }
-    
     /**
-     * Creates and returns an Item object based on the parameters.
+     * A constructor that takes an ItemDTO object and a quantitySold parameter.
      * 
-     * @param itemIdentifier identifies the item with a specified combination of numbers.
-     * @param itemInformation is the information of the item.
-     * @param price is the price of the item.
-     * @param VAT is the VAT rate based on the item.
-     * @param quantitySold is the quantity that is sold of the item. 
-     * @return the created Item object. 
+     * @param item is the item. 
+     * @param quantitySold is the quantity sold of an item.
      */
-    public static Item createItem(String itemIdentifier, String itemInformation, double price, double VAT, int quantitySold) {
-        return new Item(itemIdentifier, itemInformation, price, VAT, quantitySold);
-    }
-    
-    /**
-     * Converts the current Item object to an ItemDTO object. 
-     * 
-     * @return the ItemDTO representing the current Item object. 
-     */
-    public ItemDTO toDTO() {
-        return new ItemDTO(itemIdentifier, itemInformation, price, VAT, quantitySold);
+    public Item(ItemDTO item, int quantitySold) {
+        this.itemIdentifier = item.getItemIdentifier();
+        this.itemInformation = item.getItemInformation();
+        this.price = item.getPrice();
+        this.VAT = item.getVAT();
+        this.quantitySold = item.getQuantitySold();
     }
     
     /**

@@ -9,7 +9,6 @@ import se.kth.iv1350.amazingpointofsale.model.DTO.ItemDTO;
 import se.kth.iv1350.amazingpointofsale.model.Sale;
 import se.kth.iv1350.amazingpointofsale.model.DTO.SaleDTO;
 import se.kth.iv1350.amazingpointofsale.integration.MemberDatabase;
-import se.kth.iv1350.amazingpointofsale.model.ItemFactory;
 import se.kth.iv1350.amazingpointofsale.model.SaleObserver;
 
 /**
@@ -27,12 +26,10 @@ public class Controller {
     private final List<SaleObserver> saleObservers = new ArrayList<>();
     
     /**
-     * Start a new sale.This is the first method called in the application. 
-     * 
-     * @param itemFactory the ItemFactory used for creating items in the sale. 
+     * Start a new sale. This is the first method called in the application. 
      */
-    public void startSale(ItemFactory itemFactory) {
-        sale = new Sale(itemFactory);
+    public void startSale() {
+        sale = new Sale();
     }
     
     /**

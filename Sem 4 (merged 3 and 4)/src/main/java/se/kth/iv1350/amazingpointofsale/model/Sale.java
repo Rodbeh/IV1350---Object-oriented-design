@@ -24,14 +24,11 @@ public class Sale {
     private boolean discountApplied = false;
     private double totalDiscount = 0;
     private final List<SaleObserver> saleObservers = new ArrayList<>();
-    private final ItemFactory itemFactory;
     
     /**
      * Creates a new instance and saves the time of the sale. 
-     * @param itemFactory is used to create items for the sale. 
      */
-    public Sale(ItemFactory itemFactory) {
-        this.itemFactory = itemFactory;
+    public Sale() {
         setTimeAndDateOfSale();
         receipt = new Receipt(this);
     }
@@ -130,19 +127,17 @@ public class Sale {
      * @param quantitySold is the quantity of the item sold.
      * @return the updated display after registering the item sale. 
      */
-    public String registerItemToSaleLog(ItemDTO itemDTO, int quantitySold) {
-         Item item = itemFactory.createItem(itemDTO, quantitySold);
-        
-        if (itemHasBeenRegistered(itemDTO)) {
-            increaseQuantity(itemDTO, quantitySold);
+    public String registerItemToSaleLog(ItemDTO item, int quantity) {
+        if (itemHasBeenRegistered(item)) {
+            increaseQuantity(item, quantity);
         } else {
-            itemList.add(item);
-            item.setQuantitySold(quantitySold);
+            itemList.add(new Item(item, quantity));
+            itemList.get(itemList.size() - 1).setQuantitySold(quantity);
         }
         
-        updateRunningTotalAndVAT(itemDTO, quantitySold);
+        updateRunningTotalAndVAT(item, quantity);
         
-        return updateTheDisplay(itemDTO, quantitySold);
+        return updateTheDisplay(item, quantity);
     }
     
     
@@ -208,9 +203,9 @@ public class Sale {
     /**
     * Returns a string with the description of the item and the running total of the sale.
     *
-    * @param item the item being sold
-    * @param quantity of the item being sold
-    * @return a string with the description and running total
+    * @param item the item being sold.
+    * @param quantity of the item being sold.
+    * @return a string with the description and running total.
     */
     private String updateTheDisplay(ItemDTO item, int quantity) {
         String vara = String.format("Varubeskrivning: %s", item.getItemInformation());    

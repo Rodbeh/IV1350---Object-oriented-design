@@ -19,8 +19,7 @@ public class SaleTest {
 
     @BeforeEach
     public void setUp() {
-        ItemFactory itemFactory = new DefaultItemFactory();
-        sale = new Sale(itemFactory);
+        sale = new Sale();
         fakeItem = new ItemDTO("1234", "item", 149.99, 0.10, 10);
         anotherFakeItem = new ItemDTO("4567", "anotherItem", 299.99, 0.20, 20);
         sale.registerItemToSaleLog(fakeItem, 1);
